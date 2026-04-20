@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1768555901}'
+  labels:
+    app.kubernetes.io/instance: dev-root-app
+  name: pds-integration-service-dev
+  namespace: argocd
+spec:
+  destination:
+    name: ""
+    namespace: dp-common
+    server: https://pd-dev-304-cmp.k8s-api:16443
+  project: 304-cmp-dev
+  source:
+    path: 2-products/2.13-dp-common/pds-integration-service/overlays/admin/oce/dev
+    repoURL: https://bitbucket.org/okestrolab/maestro-packaging.git
+    targetRevision: dev
+  sources: []
+  syncPolicy: {}

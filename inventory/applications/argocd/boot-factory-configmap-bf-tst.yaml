@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1768555859}'
+  name: boot-factory-configmap-bf-tst
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://pq-tst-bf.k8s-api:16443
+  project: bf-tst
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: config/overlays/bf-tst
+    repoURL: https://bitbucket.org/okestrolab/config-mgmt.git
+    targetRevision: main
+  syncPolicy: {}

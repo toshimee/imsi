@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1768555922}'
+  name: trombone-configmap-3.0.3-tst
+  namespace: argocd
+spec:
+  destination:
+    namespace: viola
+    server: https://3.0.3-tst.k8s-api:16443
+  project: 3.0.3-tst
+  source:
+    path: config/overlays/3.0.3-tst/trombone
+    repoURL: https://bitbucket.org/okestrolab/config-mgmt.git
+    targetRevision: main
+  syncPolicy: {}

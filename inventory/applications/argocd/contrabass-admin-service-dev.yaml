@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+  labels:
+    app.kubernetes.io/instance: dev-root-app
+  name: contrabass-admin-service-dev
+  namespace: argocd
+spec:
+  destination:
+    namespace: contrabass
+    server: https://pd-dev-304-cmp.k8s-api:16443
+  project: 304-cmp-dev
+  source:
+    path: 2-products/2.2-contrabass/contrabass-admin-service/overlays/admin/oce/dev
+    repoURL: https://bitbucket.org/okestrolab/maestro-packaging.git
+    targetRevision: dev
+  syncPolicy: {}

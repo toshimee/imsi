@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1774939244}'
+  name: trb-dev-cmp-3.0.5-configmap
+  namespace: argocd
+spec:
+  destination:
+    name: pq-305-dev-cmp
+    namespace: okestro-cmp
+  project: trb-dev-cmp305
+  source:
+    path: config/overlays/3.0.5-dev-cmp/cmp
+    repoURL: https://bitbucket.org/okestrolab/config-mgmt.git
+    targetRevision: main
+  syncPolicy: {}

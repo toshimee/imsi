@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1768555892}'
+  name: maestro-iam-adapter-api-ppp
+  namespace: argocd
+spec:
+  destination:
+    namespace: cmp
+    server: https://ppp-admin-master-1:6443
+  project: ppp
+  source:
+    path: 2-products/2.1-maestro/maestro-iam-adapter-api/overlays/admin/ppp
+    repoURL: https://bitbucket.org/okestrolab/maestro-packaging.git
+    targetRevision: dev
+  syncPolicy: {}

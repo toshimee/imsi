@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+  name: blue-argocd
+  namespace: argocd
+spec:
+  destination:
+    name: gu
+    namespace: argocd
+  project: default
+  source:
+    path: argocd/platforms/argocd/overlays/green
+    repoURL: https://bitbucket.org/okestrolab/terraform-packaging.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true

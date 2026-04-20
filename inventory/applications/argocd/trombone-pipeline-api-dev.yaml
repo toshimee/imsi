@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1768555924}'
+  labels:
+    app.kubernetes.io/instance: dev-root-app
+  name: trombone-pipeline-api-dev
+  namespace: argocd
+spec:
+  destination:
+    namespace: trombone
+    server: https://pd-dev-304-cmp.k8s-api:16443
+  project: 304-cmp-dev
+  source:
+    path: 2-products/2.6-trombone/trombone-pipeline-api/overlays/admin/oce/dev
+    repoURL: https://bitbucket.org/okestrolab/maestro-packaging.git
+    targetRevision: dev
+  syncPolicy: {}

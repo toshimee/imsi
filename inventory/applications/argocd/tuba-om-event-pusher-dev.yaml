@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1768555926}'
+  labels:
+    app.kubernetes.io/instance: dev-root-app
+  name: tuba-om-event-pusher-dev
+  namespace: argocd
+spec:
+  destination:
+    namespace: vista
+    server: https://pd-dev-304-cmp.k8s-api:16443
+  project: 304-cmp-dev
+  source:
+    path: 2-products/2.5-vista/tuba-om-event-pusher/overlays/admin/oce/dev
+    repoURL: https://bitbucket.org/okestrolab/maestro-packaging.git
+    targetRevision: dev
+  syncPolicy: {}

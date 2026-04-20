@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1773376532}'
+  name: ceph-configmap-3.0.5-bf-kst
+  namespace: argocd
+spec:
+  destination:
+    namespace: ceph
+    server: https://kst305-k8s-api.okestro-k8s.com:16443
+  project: 3.0.5-kst-bf
+  source:
+    path: config/overlays/3.0.5-bf-kst/ceph
+    repoURL: https://bitbucket.org/okestrolab/config-mgmt.git
+    targetRevision: main
+  syncPolicy: {}

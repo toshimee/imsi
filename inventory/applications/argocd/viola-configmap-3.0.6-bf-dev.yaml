@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+  name: viola-configmap-3.0.6-bf-dev
+  namespace: argocd
+spec:
+  destination:
+    name: 306dev-bf
+    namespace: viola
+  project: dev-bf306
+  source:
+    path: config/overlays/3.0.6-bf-dev/viola
+    repoURL: https://bitbucket.org/okestrolab/config-mgmt.git
+    targetRevision: main
+  syncPolicy: {}

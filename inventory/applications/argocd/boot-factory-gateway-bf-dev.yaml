@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1770429197}'
+  name: boot-factory-gateway-bf-dev
+  namespace: argocd
+spec:
+  destination:
+    namespace: boot-factory
+    server: https://sd-dev-bf.k8s-api:16443
+  project: bf-dev
+  source:
+    path: 2-products/2.14-boot-factory/boot-factory-gateway/overlays/admin/bf-dev
+    repoURL: https://bitbucket.org/okestrolab/maestro-packaging.git
+    targetRevision: dev
+  syncPolicy: {}

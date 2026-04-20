@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1768555904}'
+  name: remote-trombone-dev-cluster
+  namespace: argocd
+spec:
+  destination:
+    namespace: viola
+    server: https://pd-dev-304-cmp.k8s-api:16443
+  project: 304-cmp-dev
+  source:
+    kustomize:
+      nameSuffix: -admin
+      patches:
+      - patch: |
+          - op: replace
+            path: /data/BASE_URL
+            value: dev.admin.okestro.cloud
+          - op: replace
+            path: /data/HARBOR_REPO_URL
+            value: dev.admin.okestro.cloud/okestro/sample:latest
+        target:
+          kind: ConfigMap
+          name: trombone-app-env
+    path: 2-products/2.6-trombone/trombone-remote-app/overlays/admin/oce/dev
+    repoURL: https://bitbucket.org/okestrolab/maestro-packaging.git
+    targetRevision: HEAD
+  syncPolicy: {}

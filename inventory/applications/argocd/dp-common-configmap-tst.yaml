@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+  name: dp-common-configmap-tst
+  namespace: argocd
+spec:
+  destination:
+    namespace: dataplatform
+    server: https://tst.k8s-api.okestro-k8s.com:16443
+  project: validation
+  source:
+    path: config/overlays/tst/dp-common
+    repoURL: https://bitbucket.org/okestrolab/config-mgmt.git
+    targetRevision: tst
+  syncPolicy: {}

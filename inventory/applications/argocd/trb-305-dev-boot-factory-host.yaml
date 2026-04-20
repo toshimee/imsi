@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .;../../base
+    notified.notifications.argoproj.io: '{"on-deployed:[0].zxM90Et6k4Elb1-fHdjtDJq0xR0:lifecycle:":1774848705}'
+  name: trb-305-dev-boot-factory-host
+  namespace: argocd
+spec:
+  destination:
+    namespace: boot-factory
+    server: https://sd-dev-305dev-bf.k8s-api:16443
+  project: dev-bf305
+  source:
+    path: environments/3.0.5/bootfactory/Bootfactory/boot-factory-host/overlays/dev
+    repoURL: http://gitlab.prd.console.trombone.okestro.cloud/yn.yoo/maestro-packaging.git
+    targetRevision: main
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
